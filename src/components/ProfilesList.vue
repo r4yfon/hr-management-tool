@@ -15,28 +15,32 @@ import NewProfile from "./NewProfile.vue";
         @input="searchProfiles"
       />
     </div>
-    <table class="border border-separate border-slate-800 text-left w-full table-fixed mb-3">
-      <thead>
-        <tr>
-          <th class="border border-slate-800 p-1">Name</th>
-          <th class="border border-slate-800 p-1">Gender</th>
-          <th class="border border-slate-800 p-1">Age</th>
-          <th class="border border-slate-800 p-1">Year of Birth</th>
-          <th class="border border-slate-800 p-1">Remarks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="profile in displayProfiles" :key="profile.id">
-          <td class="border border-slate-800 p-1" v-for="info in profile" :key="info">
-            {{ info }}
-          </td>
-          <!-- <td class="border border-slate-800 p-1">{{ profile.gender }}</td>
+    <div class="w-full overflow-scroll">
+      <table
+        class="border border-separate border-slate-800 text-left w-full table-fixed mb-3 profile-table"
+      >
+        <thead>
+          <tr>
+            <th class="border border-slate-800 p-1">Name</th>
+            <th class="border border-slate-800 p-1">Gender</th>
+            <th class="border border-slate-800 p-1">Age</th>
+            <th class="border border-slate-800 p-1">Year of Birth</th>
+            <th class="border border-slate-800 p-1">Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="profile in displayProfiles" :key="profile.id">
+            <td class="border border-slate-800 p-1" v-for="info in profile" :key="info">
+              {{ info }}
+            </td>
+            <!-- <td class="border border-slate-800 p-1">{{ profile.gender }}</td>
           <td class="border border-slate-800 p-1">{{ profile.age }}</td>
           <td class="border border-slate-800 p-1">{{ profile.yearOfBirth }}</td>
           <td class="border border-slate-800 p-1">{{ profile.remarks }}</td> -->
-        </tr>
-      </tbody>
-    </table>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- Button to add new profile -->
     <!-- <RouterLink to="/new-profile">Add new profile</RouterLink> -->
@@ -171,3 +175,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.profile-table {
+  min-width: 400px;
+  overflow-x: scroll;
+}
+</style>
