@@ -1,6 +1,5 @@
 <script setup>
-import ProfilesList from "./components/ProfilesList.vue";
-import NavBar from "./components/NavBar.vue";
+  import NavBar from "./components/NavBar.vue";
 </script>
 
 <template>
@@ -9,6 +8,5 @@ import NavBar from "./components/NavBar.vue";
   </header>
   <main>
     <RouterView />
-    <!-- <ProfilesList /> -->
   </main>
 </template>
