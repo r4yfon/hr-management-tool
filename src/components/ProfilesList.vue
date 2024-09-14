@@ -1,5 +1,8 @@
 <script setup>
   import { Dialog, DialogPanel, DialogTitle } from "@headlessui/vue";
+  import { AgGridVue } from "ag-grid-vue3";
+  import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
+  import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
   import NewProfile from "./NewProfile.vue";
 </script>
 
@@ -14,6 +17,12 @@
         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         @input="searchProfiles" />
     </div>
+    <ag-grid-vue
+      :rowData="displayProfiles"
+      :columnDefs="columns"
+      class="ag-theme-quartz"
+      style="height: 400px">
+    </ag-grid-vue>
     <div class="w-full overflow-scroll">
       <table
         class="border border-separate border-slate-800 text-left w-full table-fixed mb-3 profile-table">
@@ -33,8 +42,23 @@
             :key="profile.id"
             @click="openProfile(profile.id)"
             class="cursor-pointer hover:bg-gray-100">
-            <td class="border border-slate-800 p-1" v-for="info in profile" :key="info">
-              {{ info }}
+            <td class="border border-slate-800 p-1">
+              {{ profile.id }}
+            </td>
+            <td class="border border-slate-800 p-1">
+              {{ profile.name }}
+            </td>
+            <td class="border border-slate-800 p-1">
+              {{ profile.gender }}
+            </td>
+            <td class="border border-slate-800 p-1">
+              {{ profile.age }}
+            </td>
+            <td class="border border-slate-800 p-1">
+              {{ profile.yearOfBirth }}
+            </td>
+            <td class="border border-slate-800 p-1">
+              {{ profile.remarks }}
             </td>
           </tr>
         </tbody>
@@ -94,60 +118,75 @@
     name: "ProfilesList",
     components: {
       NewProfile,
+      AgGridVue,
     },
     data() {
       return {
         isOpen: false,
-        allProfiles: {
-          1: {
+        allProfiles: [
+          {
             id: 1,
             name: "John Doe",
             gender: "M",
             age: 35,
             yearOfBirth: 1988,
             remarks: "",
+            tags: [],
           },
-          2: {
+          {
             id: 2,
             name: "Jane Smith",
             gender: "F",
             age: 28,
             yearOfBirth: 1995,
             remarks: "",
+            tags: [],
           },
-          3: {
+          {
             id: 3,
             name: "Alex Johnson",
             gender: "M",
             age: 42,
             yearOfBirth: 1981,
             remarks: "",
+            tags: [],
           },
-          4: {
+          {
             id: 4,
             name: "Emily Chen",
             gender: "F",
             age: 31,
             yearOfBirth: 1992,
             remarks: "",
+            tags: [],
           },
-          5: {
+          {
             id: 5,
             name: "Michael Brown",
             gender: "M",
             age: 45,
             yearOfBirth: 1978,
             remarks: "",
+            tags: [],
           },
-          6: {
+          {
             id: 6,
             name: "Sarah Lee",
             gender: "F",
             age: 39,
             yearOfBirth: 1984,
             remarks: "",
+            tags: [],
           },
-        },
+        ],
+        columns: [
+          { field: "id" },
+          { field: "name" },
+          { field: "gender" },
+          { field: "age" },
+          { field: "yearOfBirth" },
+          { field: "remarks" },
+        ],
         searchQuery: "",
         filteredProfiles: [],
       };
