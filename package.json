@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.22",
+    "@primevue/themes": "^4.0.7",
     "ag-grid-vue3": "^32.1.0",
+    "primevue": "^4.0.7",
     "vue": "^3.4.29",
-    "vue-multiselect": "^3.1.0",
     "vue-router": "^4.4.3"
   },
   "devDependencies": {

@@ -1,30 +1,37 @@
 <script setup>
-  import Multiselect from "vue-multiselect";
+  import MultiSelect from "primevue/multiselect";
 </script>
 
 <template>
   <section class="container mx-auto mt-4 px-2">
     <h1 class="text-2xl font-bold mb-4">User Details</h1>
-    <div>
-      <h2>Name: {{ selectedProfile.name }}</h2>
-      <p>ID: {{ selectedProfile.id }}</p>
-      <p>Gender: {{ selectedProfile.gender }}</p>
-      <p>Year of Birth: {{ selectedProfile.yearOfBirth }}</p>
-      <p>Age: {{ selectedProfile.age }}</p>
-      <h3>Tags:</h3>
-      <ul>
-        <div>
-          <multiselect
-            class="bg-slate-50 border rounded-md p-2"
+    <div class="flex flex-col md:flex-row md:flex-wrap gap-y-2">
+      <h2 class="basis-auto md:basis-1/2">Name: {{ selectedProfile.name }}</h2>
+      <p class="md:basis-1/2">ID: {{ selectedProfile.id }}</p>
+      <p class="md:basis-1/3">Gender: {{ selectedProfile.gender }}</p>
+      <p class="md:basis-1/3">Year of Birth: {{ selectedProfile.yearOfBirth }}</p>
+      <p class="md:basis-1/3">Age: {{ selectedProfile.age }}</p>
+      <p class="md:basis-full">
+        Remarks:
+        <textarea
+          v-model="selectedProfile.remarks"
+          class="w-full bg-slate-50 border p-2 rounded-md mt-2"
+          rows="4"></textarea>
+      </p>
+      <div class="md:basis-full">
+        <h3>
+          Tags:
+
+          <MultiSelect
             v-model="selectedProfile.tags"
             :options="allTags"
-            :multiple="true"
-            :taggable="true"
-            placeholder="Select or type tags"
-            @tag="addTag" />
-        </div>
-        <!-- <li v-for="tag in user.tags" :key="tag">{{ tag }}</li> -->
-      </ul>
+            :dt="customTokens"
+            display="chip"
+            filter
+            placeholder="Select Tags"
+            class="w-full" />
+        </h3>
+      </div>
     </div>
   </section>
 </template>
@@ -32,7 +39,7 @@
 <script>
   export default {
     components: {
-      Multiselect,
+      MultiSelect,
     },
     data() {
       return {
@@ -105,6 +112,9 @@
           "Tag 9",
           "Tag 10",
         ],
+        customTokens: {
+          focusBorderColor: "{slate.500}",
+        },
       };
     },
     created() {
@@ -127,51 +137,7 @@
 </script>
 
 <style>
-  .multiselect {
-    position: relative;
-  }
-
-  .multiselect--active input:focus-visible {
-    outline: none;
-    background: inherit;
-  }
-
-  .multiselect__select {
-    line-height: 16px;
-    display: block;
-    position: absolute;
-    box-sizing: border-box;
-    width: 40px;
-    height: 38px;
-    right: 1px;
-    top: 1px;
-    padding: 4px 8px;
-    margin: 0;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  .multiselect--active .multiselect__select {
-    transform: rotate(180deg);
-  }
-
-  .multiselect__select:before {
-    position: relative;
-    right: 0;
-    top: 65%;
-    color: #999;
-    margin-top: 4px;
-    border-style: solid;
-    border-width: 5px 5px 0 5px;
-    border-color: #999 transparent transparent transparent;
-    content: "";
-  }
-
-  .multiselect__tag {
-    margin: 4px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    background: #f0f0f0;
+  .p-chip-remove-icon:hover {
+    --p-chip-remove-icon-color: var(--p-red-500);
   }
 </style>
