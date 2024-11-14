@@ -10,9 +10,7 @@ createApp(App)
   .use(router)
   .use(PrimeVue, {
     theme: {
-
       preset: Aura,
-      
-    }
+    },
   })
   .mount("#app");
