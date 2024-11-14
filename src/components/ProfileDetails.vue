@@ -119,13 +119,7 @@
     },
     created() {
       this.userId = this.$route.params.userId;
-      // console.log(this.profile);
       this.selectedProfile = this.allProfiles[this.userId - 1];
-      // Fetch user details based on the ID from the route params
-      // Make an API call or fetch the user details from your data source
-      // Assign the fetched user details to the 'user' data property
-      // Example:
-      // this.user = fetchUserDetails(userId);
     },
     methods: {
       addTag(tag) {
